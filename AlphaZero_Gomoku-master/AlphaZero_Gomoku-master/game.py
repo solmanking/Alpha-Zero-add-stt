@@ -6,6 +6,7 @@
 from __future__ import print_function
 import numpy as np
 from Write_txt import write
+from Reconition import soundWinner
 
 
 class Board(object):
@@ -188,6 +189,7 @@ class Game(object):
                 if is_shown:
                     if winner != -1:
                         print("Game end. Winner is", players[winner])
+                        soundWinner(winner)                 #播報勝利語音
                     else:
                         print("Game end. Tie")
                 return winner
@@ -223,7 +225,7 @@ class Game(object):
                 if is_shown:
                     if winner != -1:
                         print("Game end. Winner is player:", winner)
-
+                        soundWinner(winner)
                     else:
                         print("Game end. Tie")
                 return winner, zip(states, mcts_probs, winners_z)#加入 重新開始機制

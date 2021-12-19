@@ -9,6 +9,7 @@ network to guide the tree search and evaluate the leaf nodes
 import numpy as np
 import copy
 from Write_txt import write
+from Reconition import reportAIPos
 #from Arduino_Trasform import sendData
 
 
@@ -229,8 +230,14 @@ class MCTSPlayer(object):
                 ##增加ai下棋座標
                 print("這是移動概率", "\n", move_probs)
 
+
                 #sendData(move)          #傳給Arduino值
+
                 print(type(move))
+
+                intmove = int(move)
+                print(intmove)
+                reportAIPos(intmove)
 
                 ai_position =[move//8,move%8]
                 write(move)

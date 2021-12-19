@@ -8,6 +8,8 @@ Input your move in the format: 2,3
 
 from __future__ import print_function
 import pickle
+import time
+
 from game import Board, Game
 from mcts_pure import MCTSPlayer as MCTS_Pure
 from mcts_alphaZero import MCTSPlayer
@@ -15,16 +17,19 @@ from policy_value_net_numpy import PolicyValueNetNumpy
 
 from Reconition import soundGet
 from Reconition import soundStart
+from Reconition import reportPos
+from Reconition import reportwork
+from Reconition import inputsound
+from Reconition import Readysound
 
 from Write_txt import write
 from Write_txt import cleanNote
 
+
 #import GUI as gui
-
-
 #from anotherTestMap import VisBoard
-
 #from  Arduino_Trasform import sendData   #Arduino 呼叫
+
 
 # from policy_value_net import PolicyValueNet  # Theano and Lasagne
 # from policy_value_net_pytorch import PolicyValueNet  # Pytorch
@@ -51,7 +56,9 @@ class Human(object):
         try:
             if(self.errorcount>0):
                 location = soundGet()#設location=輸入的值  這裡改語音輸入
+
             else:
+                inputsound()
                 location = input("開啟手動輸入: ")#失敗三次轉手動
 
             if isinstance(location, str):  # for python3 #如果lacation屬性是string
@@ -63,9 +70,12 @@ class Human(object):
             move = board.location_to_move(location) #move為用location[x,y]引到game得到x*8+y的值
             print("move x*8+y =")
             print(move)#確認move的值
+            reportPos(move)
+
 
             #sendData(move)          #傳給Arduino值
             print(type(move))
+
 
             #write(move)
             write(move)
@@ -78,6 +88,9 @@ class Human(object):
         if move == -1 or move not in board.availables: #move=-1或不在(7，7)之內的話重來
             print("invalid move")
             self.errorcount-=1
+            Readysound()
+            time.sleep(2)                 #延長語音錯誤 緩衝時間
+            #reportwork()                 #播報失敗
             move = self.get_action(board) #輸出重來
         #write(move)
         return move   ##回傳move值
@@ -87,12 +100,12 @@ class Human(object):
 
 
 class start(object):
-        #####程式居然從這邊開始......
+
     def run(EndorStart):
         if(EndorStart==1):
             n = 5
             width, height = 8, 8
-            model_file = 'best_policy_8_8_5.model'
+            model_file ='best_policy_8_8_5.model' #'best_policy_8_8_5.model'
             try:
                 board = Board(width=width, height=height, n_in_row=n)  #建立game,class Board的實體
                 #print(board.width)
@@ -111,7 +124,7 @@ class start(object):
                 except:
                     policy_param = pickle.load(open(model_file, 'rb'),
                                                encoding='bytes')  # To support python3
-                best_policy = PolicyValueNetNumpy(width, height, policy_param)
+                best_policy = PolicyValueNetNumpy(width, height, policy_param)#
                 mcts_player = MCTSPlayer(best_policy.policy_value_fn,
                                          c_puct=5,
                                          n_playout=400)  # set larger n_playout for better performance
@@ -129,14 +142,15 @@ class start(object):
                 # set start_player=0 for human first
                 game.start_play(human, mcts_player, start_player=0, is_shown=1)#mcts_player  human
 
+
+
                 #gui.tink().window()
 
-                '''
+
                 re =input('again? input R')
                 print(re)
                 print(type(re))
                 Retry(re)
-                '''
 
 
 
@@ -151,6 +165,7 @@ if __name__ == '__main__':       #主動建立start class 要回復把class star
     cleanNote() #清空上一局的紀錄
     #VisBoard.drawmap(1)
 
+
     def Retry(re):
          if (re == 'R'or'r'):
             print('在開始')
@@ -158,10 +173,12 @@ if __name__ == '__main__':       #主動建立start class 要回復把class star
          else:
             print('謝謝遊玩')
 
+    start.run(1)
 
+    '''
     while True:
         x = soundStart()
         if (x == 1):
             start.run(1)
             break
-
+    '''

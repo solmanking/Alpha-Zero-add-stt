@@ -16,12 +16,14 @@ ser = serial.Serial(COM_PORT, BAUD_RATES)
 def sendData(x):
 
        num=str(x)
+
+       print(x)
        print("num type =")
        print(type(num))
        #print(type(x))
        ser.write(num.encode())
        print("成功傳入sendPos")
-
+       time.sleep(10)
 
 
 

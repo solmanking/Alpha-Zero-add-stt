@@ -11,13 +11,13 @@ This is an implementation of the AlphaZero algorithm for playing the simple boar
 
 gtts語音辨識系統安裝:
 pip install 下列模組:
- speech_recognition=3.8.1
- gtts = 2.2.3
- pyaudio=0.2.11
+1.speech_recognition=3.8.1
+2.gtts = 2.2.3
+3.pyaudio=0.2.11
 
 
 使用MeArm 機械臂:
-pip install 下列模組:
+1.pip install 下列模組:
 
 Pyserial=3.5
 

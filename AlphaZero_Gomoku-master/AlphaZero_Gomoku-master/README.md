@@ -17,9 +17,9 @@ pip install 下列模組:
 
 
 使用MeArm 機械臂:
- - pip install 下列模組:
+  pip install 下列模組:
 
-Pyserial=3.5
+- Pyserial=3.5
 
 將humanPlay.py與mcts_alphaZero中的senddata 刪掉# 
 

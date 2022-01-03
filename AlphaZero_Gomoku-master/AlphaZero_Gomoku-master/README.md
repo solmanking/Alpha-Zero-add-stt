@@ -7,7 +7,7 @@ This is an implementation of the AlphaZero algorithm for playing the simple boar
 使用(遊玩)方法:
  等待"請輸入位置"語音播報結束後，以"x"+"y"的方式報位(ex:45=(x=4,y=5))先橫坐標在縱坐標，等待提示音結束後語音會開始轉化為座標，系統在確定接收到正確位置後會以語音方式播報玩家的位置已確認是否完成，接著Alpha Zero在確定我方落子後，會與玩家進行對弈，AI落子的座標也會以語音方式的播報。
   若使用機械臂，則會根據雙方的位置以pyserial模組將座標輸入給Arduino中，再藉由機械臂下棋在該位置上。
-
+若要使用Alpha Zero進行訓練，請參考下方Alpha Zero訓練集相關問題。
 
 gtts語音辨識系統安裝:
 pip install 下列模組:
